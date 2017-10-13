@@ -5,13 +5,6 @@ install or update. It works when storing the parameters in a Yaml file under
 a single top-level key (named ``parameters`` by default). Other keys are
 copied without change.
 
-[![Build Status](https://travis-ci.org/Incenteev/ParameterHandler.png)](https://travis-ci.org/Incenteev/ParameterHandler)
-[![Code Coverage](https://scrutinizer-ci.com/g/Incenteev/ParameterHandler/badges/coverage.png?s=ea5de28d9764fdcb6a576a41e244c0ac537b3c81)](https://scrutinizer-ci.com/g/Incenteev/ParameterHandler/)
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Incenteev/ParameterHandler/badges/quality-score.png?s=6143d945bbdfac5c1114d4fe5d0f4ee737db18bf)](https://scrutinizer-ci.com/g/Incenteev/ParameterHandler/)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/3a432e49-6018-41a5-a37b-b7fb151706c1/mini.png)](https://insight.sensiolabs.com/projects/3a432e49-6018-41a5-a37b-b7fb151706c1)
-[![Latest Stable Version](https://poser.pugx.org/incenteev/composer-parameter-handler/v/stable.png)](https://packagist.org/packages/incenteev/composer-parameter-handler)
-[![Latest Unstable Version](https://poser.pugx.org/incenteev/composer-parameter-handler/v/unstable.png)](https://packagist.org/packages/incenteev/composer-parameter-handler)
-
 ## Usage
 
 Add the following in your root composer.json file:
@@ -19,14 +12,14 @@ Add the following in your root composer.json file:
 ```json
 {
     "require": {
-        "incenteev/composer-parameter-handler": "~2.0"
+        "serrvius/composer-parameter-handler": "~2.0"
     },
     "scripts": {
         "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+            "Serrvius\\ParameterHandler\\ScriptHandler::buildParameters"
         ],
         "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+            "Serrvius\\ParameterHandler\\ScriptHandler::buildParameters"
         ]
     },
     "extra": {
@@ -81,15 +74,30 @@ If you need to keep outdated params you can use `keep-outdated` param in the con
 }
 ```
 
-### Using a different top-level key
+### Process multilevel parameters
 
-The script handler looks for a ``parameters`` key in your dist file.  You can change this by using the
-`parameter-key` param in the configuration:
+If in your configuration you have multilevel keys you can use parameter `recursive` and the script will ask you to change the key from secondary level.  
+If you want to process all levels you can use `recursive` param in the configuration:
+
 ```json
 {
     "extra": {
         "incenteev-parameters": {
-            "parameter-key": "config"
+            "recursive": true
+        }
+    }
+}
+```
+
+### Using a multiple top-level keys
+
+The script handler looks for a ``parameters`` key in your dist file.  You can change this by using the
+`parameter-keys` param in the configuration and set at each keys script need to looks: 
+```json
+{
+    "extra": {
+        "incenteev-parameters": {
+            "parameter-keys": ["db", "cacheDir", "siteName"]
         }
     }
 }
@@ -166,9 +174,32 @@ configurations inside it instead of a configuration object:
             {
                 "file": "app/config/databases.yml",
                 "dist-file": "app/config/databases.dist.yml",
-                "parameter-key": "config"
+                "parameter-keys": ["config"]
             }
         ]
     }
 }
 ```
+
+### Using scripts description 
+
+The script can show the custom messages for each scripts for that you can add it with key `description`:
+```json
+{
+    "extra": {
+        "incenteev-parameters": [
+              {
+                "description": "Production config",                
+                "file": "config/app.prod.yml",
+                "dist-file": "config/app.yml.dist"
+              },
+              {
+                "description": "Development config",
+                "file": "config/app.dev.yml",
+                "dist-file": "config/app.yml.dist"
+              }
+            ]
+    }
+}
+```
+
