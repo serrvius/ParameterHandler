@@ -1,3 +1,7 @@
+## 2.1.6 (2017-10-16)
+ `(by serrvius)`
+* Fix multi-level missing keys change
+
 ## 2.1.5 (2017-10-15) 
  `(by serrvius)`
 * Added of primary keys (multiple keys)

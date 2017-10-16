@@ -19,7 +19,7 @@
             "email": "serrvius@gmail.com"
         }
     ],
-    "version": "2.1.5",
+    "version": "2.1.6",
     "require": {
         "php": ">=5.3.3",
         "symfony/yaml": "~2.3|~3.0"

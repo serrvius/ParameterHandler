@@ -187,7 +187,7 @@ class Processor
         }
 
         foreach ($expectedParams as $key => $message) {
-            if (array_key_exists($key, $actualParams)) {
+            if (array_key_exists($key, $actualParams) && (is_array($actualParams) && count($actualParams[$key]) == count($expectedParams[$key]))) {
                 continue;
             }
 
