@@ -15,11 +15,11 @@
             "email": "stof@notk.org"
         },
         {
-            "name": "Sergiu Botnarenco (version 2.1.5)",
+            "name": "Sergiu Botnarenco (version 2.1.7)",
             "email": "serrvius@gmail.com"
         }
     ],
-    "version": "2.1.6",
+    "version": "2.1.7",
     "require": {
         "php": ">=5.3.3",
         "symfony/yaml": "~2.3|~3.0"

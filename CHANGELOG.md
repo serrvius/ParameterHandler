@@ -1,3 +1,8 @@
+## 2.1.7 (2018-06-20)
+ `(by serrvius)`
+* Fix multi-level params update error
+* Fix update keys they dist change type on key content (ex: from *array* <-> *string*)
+
 ## 2.1.6 (2017-10-16)
  `(by serrvius)`
 * Fix multi-level missing keys change

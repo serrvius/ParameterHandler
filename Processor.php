@@ -120,6 +120,8 @@ class Processor
             if(!empty($actualParams)){
                 $actualParams = array($currentKey => $actualParams);
             }
+        }elseif(!is_array($actualParams)){
+            $actualParams = [];
         }
 
         $renameMap    = empty($config['rename-map']) ? array() : (array) $config['rename-map'];
@@ -187,7 +189,10 @@ class Processor
         }
 
         foreach ($expectedParams as $key => $message) {
-            if (array_key_exists($key, $actualParams) && (is_array($actualParams) && count($actualParams[$key]) == count($expectedParams[$key]))) {
+            if (array_key_exists($key, $actualParams)
+                && ((is_array($actualParams[$key]) && is_array($expectedParams[$key]) && count($actualParams[$key]) == count($expectedParams[$key]))
+                    || (is_scalar($actualParams[$key]) && array_key_exists($key,$expectedParams)))
+                ) {
                 continue;
             }
 
